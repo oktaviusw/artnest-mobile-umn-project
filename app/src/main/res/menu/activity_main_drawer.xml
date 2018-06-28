@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group>
+        <item
+            android:id="@+id/nav_explore"
+            android:icon="@drawable/ic_action_explore"
+            android:title="Explore" />
+        <item
+            android:id="@+id/nav_messages"
+            android:icon="@drawable/ic_action_message"
+            android:title="Messages" />
+        <item
+            android:id="@+id/nav_request_list"
+            android:icon="@drawable/ic_action_commision"
+            android:title="Requests" />
+    </group>
+
+    <item
+        android:id = "@+id/nav_group_artist"
+        android:title="Artist">
+        <menu>
+            <item
+                android:id="@+id/nav_artist_profile_page"
+                android:icon="@drawable/ic_action_profile_page"
+                android:title="Portfolio" />
+            <item
+                android:id="@+id/nav_artist_commission_list"
+                android:icon="@drawable/ic_action_project"
+                android:title="Projects" />
+            <item
+                android:id="@+id/nav_artist_become_artist"
+                android:icon="@drawable/ic_action_create_artist"
+                android:title="Become an Artist" />
+        </menu>
+    </item>
+    <item
+        android:id = "@+id/nav_group_setting"
+        android:title="Artist">
+        <menu>
+            <item
+                android:id="@+id/nav_setting_account"
+                android:icon="@drawable/ic_action_setting_utility"
+                android:title="Account Settings" />
+            <item
+                android:id="@+id/nav_info_about_us"
+                android:icon="@drawable/ic_action_about_us"
+                android:title="About Us" />
+            <item
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_action_log_out"
+                android:title="Log Out" />
+        </menu>
+    </item>
+</menu>

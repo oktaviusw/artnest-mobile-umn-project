@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ArtNest</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_display_artwork">Artwork</string>
+    <string name="title_activity_artist_portofolio">Portfolio</string>
+    <string name="title_activity_add_artwork">Add New Artwork</string>
+    <string name="title_activity_setting">Settings</string>
+    <string name="title_activity_search_result">ActivitySearchResult</string>
+    <string name="title_activity_create_commission">ActivityCreateCommission</string>
+</resources>

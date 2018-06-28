@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ActivityArtistPortfolio"
+    tools:showIn="@layout/activity_artist_portofolio">
+
+    <ScrollView
+        android:id="@+id/scroll_view_portfolio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f0f0f0">
+                <ImageView
+                    android:id="@+id/artist_display_background_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:background="#000"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/artist_display_picture"
+                    android:layout_marginTop="80dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:focusableInTouchMode="true"
+                    android:id="@+id/artist_display_name_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Artist"
+                    android:textStyle="bold"
+                    android:textSize="30sp"
+                    android:textAlignment="center"
+                    android:textColor="#000"/>
+                <RatingBar
+                    style="@style/Base.Widget.AppCompat.RatingBar"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="4"
+                    android:theme="@style/RatingBar" />
+                <TextView
+                    android:id="@+id/completed_project"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="xx Completed Works"
+                    android:textSize="20sp"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:id="@+id/twitter_link_text"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="https://www.twitter.com/artistAcc"
+                    android:textSize="15sp"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:id="@+id/facebook_link_text"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="https://www.facebook.com/artistAcc"
+                    android:textSize="15sp"
+                    android:textAlignment="center"/>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/artist_desc_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:layout_margin="10dp"
+                    android:background="#f0f0f0"
+                    app:cardCornerRadius="10dp">
+
+                    <TextView
+                        android:padding="10dp"
+                        android:text="About Me"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/artist_about_me"
+                        android:layout_marginTop="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:padding="10dp"
+                        android:text="Artist Description"
+                        android:textColor="#000"
+                        android:textSize="18sp"/>
+
+                </android.support.v7.widget.CardView>
+
+                <Button
+                    android:id="@+id/ask_commission_button"
+
+                    android:layout_gravity="center_horizontal"
+
+                    android:text="Ask Commission"
+
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_ask_commission"
+
+                    android:layout_marginTop="10dp"
+                    />
+
+                <com.nex3z.flowlayout.FlowLayout
+                    android:id="@+id/category_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                </com.nex3z.flowlayout.FlowLayout>
+
+                <LinearLayout
+                    android:id="@+id/ScrollArtworkView"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:paddingLeft="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Artworks > "
+                            android:textColor="#0f0f0f"
+                            android:textStyle="bold"
+                            android:textSize="25sp"/>
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/RV_artwork_list_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp"
+                        android:orientation="vertical"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </ScrollView>
+</FrameLayout>
