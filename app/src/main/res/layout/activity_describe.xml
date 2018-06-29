@@ -24,7 +24,6 @@
         android:orientation="horizontal"
         android:padding="20dp"></LinearLayout>
 
-
     <Button
         android:id="@+id/prevBtn"
         android:layout_width="80dp"
