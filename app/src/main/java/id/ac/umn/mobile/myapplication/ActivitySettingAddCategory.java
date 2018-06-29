@@ -144,8 +144,8 @@ public class ActivitySettingAddCategory extends AppCompatActivity {
 
         categoryGroup.removeAllViews();
 
-        ArrayAdapter<String> adapterCategory = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, availableCategoryList);
-        adapterCategory.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapterCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, availableCategoryList);
+        adapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         availableCategorySpinner.setAdapter(adapterCategory);
 
         float conversionDP = this.getResources().getDisplayMetrics().density;
