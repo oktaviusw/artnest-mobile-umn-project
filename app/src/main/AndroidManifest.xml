@@ -63,6 +63,10 @@
         <activity
             android:name=".ActivityCreateCommission"
             android:label="@string/title_activity_create_commission"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ActivitySettingAddCategory"
+            android:label="@string/title_activity_setting_add_category"
             android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".ActivitySettingAddCategory"

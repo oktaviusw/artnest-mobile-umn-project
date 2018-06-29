@@ -360,7 +360,6 @@ public class ActivitySetting extends AppCompatActivity {
         final EditText editTextFacebookLink = findViewById(R.id.edit_fb_link);
         final EditText editTextTwitterLink = findViewById(R.id.edit_twitter_link);
         final ImageView editBackgroundImageView = findViewById(R.id.imageView_background_profile);
-        FlowLayout categoryGroup = (FlowLayout) findViewById(R.id.artist_category_group_setting);
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE);
         String idArtist = pref.getString("UserID","");
