@@ -1,14 +1,19 @@
 package id.ac.umn.mobile.myapplication;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.JsonReader;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +22,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ActivityCreateCommission extends AppCompatActivity {
 
@@ -44,6 +60,8 @@ public class ActivityCreateCommission extends AppCompatActivity {
     Button btnCreateCommissionOrder;
 
     String mediaPathSketch;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +146,8 @@ public class ActivityCreateCommission extends AppCompatActivity {
         String sDesc = editDescCommission.getText().toString();
         String sStartDate = editStartDate.getText().toString();
         String sEndDate = editEndDate.getText().toString();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE);
+        String sArtist = pref.getString("UserID","");
 
         if(sTitle.replace(" ","").length()==0){
             editTitleCommission.setError("Please input this field");
@@ -162,14 +182,76 @@ public class ActivityCreateCommission extends AppCompatActivity {
                     Toast.makeText(this, "Invalid End Date.", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    UploadDataToServer();
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                    String strStartDate = dateFormat.format(startDate);
+                    String strEndDate = dateFormat.format(endDate);
+
+                    UploadDataToServer(sArtist, sCustomer, sTitle, sPrice, sDesc, strStartDate, strEndDate);
                     Toast.makeText(this, sTitle+"\n"+sCustomer+"\n"+sPrice+"\n"+sDesc+"\n"+sStartDate+"\n"+sEndDate, Toast.LENGTH_LONG).show();
                 }
             }
         }
     }
 
-    public void UploadDataToServer(){
+    public void UploadDataToServer(String artistID, String customerEmail, String titleProject, String price, String description, String startDate, String endDate){
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("IDArtist", artistID);
+        builder.addFormDataPart("EmailCustomer", customerEmail);
+        builder.addFormDataPart("TitleProject", titleProject);
+        builder.addFormDataPart("TokenValue", price);
+        builder.addFormDataPart("Description",description);
+        builder.addFormDataPart("DateStart", startDate);
+        builder.addFormDataPart("DateEnd", endDate);
+
+        if(sketchBasePicked){
+            File file = new File(mediaPathSketch);
+
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+            builder.addFormDataPart("imageData", file.getName(), requestBody);
+        }
+
+
+        MultipartBody fileToPost = builder.build();
+
+        APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
+        Call<JsonElement> callAddNewCommission = webServiceAPI.addNewCommission(fileToPost);
+
+        callAddNewCommission.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                if(response.isSuccessful()){
+                    JsonElement jsonElement = response.body();
+                    JsonObject object = jsonElement.getAsJsonObject();
+                    String status = object.get("status").getAsString();
+                    if(status.equals("OK")){
+                        Toast.makeText(getApplicationContext(), "Commission added", Toast.LENGTH_SHORT).show();
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent returnIntent = new Intent();
+                                setResult(Activity.RESULT_OK, returnIntent);
+                                finish();
+                            }
+                        }, 1000);
+                    }
+                    else {
+                        System.out.println(object.get("result").getAsString());
+                        Toast.makeText(getApplicationContext(), object.get("result").getAsString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+
+            }
+        });
+
 
     }
 

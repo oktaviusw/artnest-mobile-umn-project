@@ -67,6 +67,8 @@ public interface APIService {
     Call<JsonElement> getAllCommissionData(@Path("id") String id,
                                            @Path("role") String role);
 
+    @POST("AddNewCommission") Call<JsonElement> addNewCommission(@Body RequestBody file);
+
     @GET("GetAvailableCategory/{id}")
     Call<JsonElement> getAvailableCategoryData(@Path("id") String id);
 
