@@ -51,8 +51,11 @@ public class ActivitySetting extends AppCompatActivity {
 
     String mediaPathUserProfilePicture;
     ImageView userProfilePicture;
-
     boolean newProfilePict;
+
+    String mediaPathBackroundArtistPicture;
+    Button BackroundArtistPicture;
+    boolean newBackgroundArtistPict;
 
     List<String> categoryList = new ArrayList<>();
 
@@ -108,6 +111,7 @@ public class ActivitySetting extends AppCompatActivity {
         LoadUserData();
 
         newProfilePict = false;
+        newBackgroundArtistPict =false;
 
         Button updateUserBtn = (Button) findViewById(R.id.btn_update_data_user);
         updateUserBtn.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +125,7 @@ public class ActivitySetting extends AppCompatActivity {
         updateArtistBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UpdateArtistInfo();
+                ValidateUpdateArtistInfo();
             }
         });
 
@@ -133,38 +137,103 @@ public class ActivitySetting extends AppCompatActivity {
                 startActivityForResult(galleryIntent, 0);
             }
         });
+
+        Button selectBackgroundBtn = findViewById(R.id.btn_pick_image_background_pict);
+        selectBackgroundBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, 1);
+            }
+        });
+
+        Button addArtistCategoryBtn = findViewById(R.id.btn_add_category);
+        addArtistCategoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addIntent = new Intent(getApplicationContext() , ActivitySettingAddCategory.class);
+                startActivityForResult(addIntent,2);
+            }
+        });
+
+        Button deleteArtistCategoryBtn = findViewById(R.id.btn_delete_category);
+        deleteArtistCategoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent deleteIntent = new Intent(getApplicationContext(), ActivitySettingAddCategory.class);
+                startActivityForResult(deleteIntent,3);
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        try {
-            // When an Image is picked
-            if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
 
-                // Get the Image from data
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        if(requestCode == 0){ //Pick Profile Image Event
+            try {
+                // When an Image is picked
+                if (resultCode == RESULT_OK && null != data) {
 
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                assert cursor != null;
-                cursor.moveToFirst();
+                    // Get the Image from data
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                mediaPathUserProfilePicture = cursor.getString(columnIndex);
-                cursor.close();
+                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    assert cursor != null;
+                    cursor.moveToFirst();
 
-                System.out.println(mediaPathUserProfilePicture);
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    mediaPathUserProfilePicture = cursor.getString(columnIndex);
+                    cursor.close();
 
-                // Set the Image in ImageView for Previewing the Media
-                newProfilePict = true;
-                Picasso.get().load(selectedImage).fit().centerCrop().transform(new PicassoCircleTransform()).into(userProfilePicture);
-            } else {
-                Toast.makeText(this, "You haven't picked Image for Profile Picture", Toast.LENGTH_LONG).show();
+                    System.out.println(mediaPathUserProfilePicture);
+
+                    // Set the Image in ImageView for Previewing the Media
+                    newProfilePict = true;
+                    Picasso.get().load(selectedImage).fit().centerCrop().transform(new PicassoCircleTransform()).into(userProfilePicture);
+                } else {
+                    Toast.makeText(this, "You haven't picked Image for Profile Picture", Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+        }
+        if(requestCode == 1){ //Pick Background Artist Image Event
+            try {
+                // When an Image is picked
+                if (resultCode == RESULT_OK && null != data) {
+
+                    // Get the Image from data
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    assert cursor != null;
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    mediaPathBackroundArtistPicture = cursor.getString(columnIndex);
+                    cursor.close();
+
+                    // Set the Image in ImageView for Previewing the Media
+                    newBackgroundArtistPict = true;
+
+                    ImageView backgroundArtistPict = findViewById(R.id.imageView_background_profile);
+                    Picasso.get().load(selectedImage).fit().centerCrop().into(backgroundArtistPict);
+                } else {
+                    Toast.makeText(this, "You haven't picked Image for Profile Picture", Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+        }
+        if(requestCode == 2 || requestCode == 3){  //Add New Category Event
+            Toast.makeText(this, data.getData().toString(), Toast.LENGTH_LONG).show();
+
+            if (resultCode == RESULT_OK) LoadArtistCategoriesData();
         }
     }
 
@@ -221,8 +290,6 @@ public class ActivitySetting extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
-
-
     }
 
     public void ValidateUpdateUserInfo(){
@@ -266,6 +333,8 @@ public class ActivitySetting extends AppCompatActivity {
 
     public void LoadArtistCategories(){
         FlowLayout categoryGroup = (FlowLayout) findViewById(R.id.artist_category_group_setting);
+
+        categoryGroup.removeAllViews();
 
         float conversionDP = this.getResources().getDisplayMetrics().density;
         for(int i = 0; i < categoryList.size() ; i++){
@@ -410,8 +479,37 @@ public class ActivitySetting extends AppCompatActivity {
         });
     }
 
-    public void UpdateArtistInfo(){
+    public void LoadArtistCategoriesData(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE);
+        String idArtist = pref.getString("UserID","");
 
+        APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
+        Call<JsonElement> callArtist = webServiceAPI.getArtist(idArtist);
+
+        callArtist.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                JsonElement element = response.body();
+                JsonObject obj = element.getAsJsonObject();
+                JsonObject singleData = obj.get("result").getAsJsonObject();
+
+                categoryList.clear();
+                JsonArray categoryMultipleData = singleData.get("Categories").getAsJsonArray();
+                for(int i = 0; i < categoryMultipleData.size(); i++){
+                    categoryList.add(categoryMultipleData.get(i).getAsString());
+                }
+
+                LoadArtistCategories();
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+
+            }
+        });
     }
 
+    public void ValidateUpdateArtistInfo(){
+
+    }
 }

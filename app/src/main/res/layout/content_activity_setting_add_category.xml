@@ -53,6 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_marginTop="10dp"
                         android:layout_width="0dp"
@@ -62,11 +63,11 @@
                         android:textSize="18sp"/>
 
                     <Spinner
+                        android:id="@+id/spinner_available_category"
                         android:layout_marginTop="10dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
-
                     </Spinner>
 
                 </LinearLayout>
@@ -75,7 +76,7 @@
                     android:id="@+id/btn_update_add_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
                     android:background="@drawable/button_login_artnest"
                     android:text="Apply Update"
                     android:textColor="#f0f0f0"
