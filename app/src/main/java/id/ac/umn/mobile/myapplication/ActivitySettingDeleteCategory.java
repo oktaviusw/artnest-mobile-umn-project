@@ -57,7 +57,7 @@ public class ActivitySettingDeleteCategory extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         categoryGroup = findViewById(R.id.artist_category_group_setting);
-        availableCategorySpinner = findViewById(R.id.spinner_available_category);
+        availableCategorySpinner = findViewById(R.id.spinner_delete_category);
         editPasswordText = findViewById(R.id.password_edit);
         btnApplyUpdate = findViewById(R.id.btn_update_add_category);
 
@@ -171,17 +171,16 @@ public class ActivitySettingDeleteCategory extends AppCompatActivity {
     }
 
     public void UpdateToServer(){
-        /*
         progressDialog.setMessage("Applying Update");
         progressDialog.show();
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE);
         String idArtist = pref.getString("UserID","");
         String userPassword = editPasswordText.getText().toString();
-        String newCategory = availableCategorySpinner.getSelectedItem().toString();
+        String targetCategory = availableCategorySpinner.getSelectedItem().toString();
 
         APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
-        Call<JsonElement> callUpdateCategory = webServiceAPI.applyUpdateDeleteCategoryData(idArtist, userPassword, newCategory);
+        Call<JsonElement> callUpdateCategory = webServiceAPI.applyUpdateDeleteCategoryData(idArtist, userPassword, targetCategory);
 
         callUpdateCategory.enqueue(new Callback<JsonElement>() {
             @Override
@@ -213,7 +212,6 @@ public class ActivitySettingDeleteCategory extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT);
             }
         });
-        */
     }
 
 }

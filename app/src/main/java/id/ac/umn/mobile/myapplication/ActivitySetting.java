@@ -160,7 +160,7 @@ public class ActivitySetting extends AppCompatActivity {
         deleteArtistCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent deleteIntent = new Intent(getApplicationContext(), ActivitySettingAddCategory.class);
+                Intent deleteIntent = new Intent(getApplicationContext(), ActivitySettingDeleteCategory.class);
                 startActivityForResult(deleteIntent,3);
             }
         });
