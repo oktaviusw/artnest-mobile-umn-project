@@ -64,4 +64,10 @@ public interface APIService {
 
     @GET("GetAvailableCategory/{id}")
     Call<JsonElement> getAvailableCategoryData(@Path("id") String id);
+
+    @POST("UpdateAddCategory")
+    @FormUrlEncoded
+    Call<JsonElement> applyUpdateAddCategoryData(@Field("idArtist") String IDArtist,
+                                                 @Field("passwordArtist") String passwordArtist,
+                                                 @Field("newCategoryArtist") String newCategoryArtist);
 }

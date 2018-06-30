@@ -14,75 +14,117 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="#f0f0f0"
-            app:cardCornerRadius="3dp">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/account_setting_header"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_margin="15dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:textSize="25sp"
+                android:text="A jack of all trades is a master of none, but oftentimes better than a master of one"
+                />
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_vertical"
+                android:background="#f0f0f0"
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
+                    android:id="@+id/account_setting_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Artist Categories"
+                        android:layout_margin="3dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Artist Categories"
+                            android:textSize="18sp" />
+
+                        <com.nex3z.flowlayout.FlowLayout
+                            android:id="@+id/artist_category_group_setting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                        </com.nex3z.flowlayout.FlowLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="New Category"
+                            android:textSize="18sp"/>
+
+                        <Spinner
+                            android:id="@+id/spinner_available_category"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                        </Spinner>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="Password"
+                            android:textSize="18sp" />
+
+                        <EditText
+                            android:id="@+id/password_edit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="textPassword"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_update_add_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/button_login_artnest"
+                        android:text="Apply Update"
+                        android:textColor="#f0f0f0"
                         android:textSize="18sp" />
 
-                    <com.nex3z.flowlayout.FlowLayout
-                        android:id="@+id/artist_category_group_setting"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp">
-
-                    </com.nex3z.flowlayout.FlowLayout>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_marginTop="10dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="New Category"
-                        android:textSize="18sp"/>
-
-                    <Spinner
-                        android:id="@+id/spinner_available_category"
-                        android:layout_marginTop="10dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-                    </Spinner>
-
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/btn_update_add_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:background="@drawable/button_login_artnest"
-                    android:text="Apply Update"
-                    android:textColor="#f0f0f0"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>

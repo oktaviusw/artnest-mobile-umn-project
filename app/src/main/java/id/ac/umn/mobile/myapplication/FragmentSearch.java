@@ -132,7 +132,5 @@ public class FragmentSearch extends Fragment {
         extras.putString("searchType",searchType);
         intent.putExtras(extras);
         startActivity(intent);
-
-        Toast.makeText(myView.getContext(), searchKeyWord+"\n"+searchCategory+"\n"+searchType, Toast.LENGTH_LONG).show();
     }
 }
