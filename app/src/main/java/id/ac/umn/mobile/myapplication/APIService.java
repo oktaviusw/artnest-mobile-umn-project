@@ -77,4 +77,10 @@ public interface APIService {
     Call<JsonElement> applyUpdateAddCategoryData(@Field("idArtist") String IDArtist,
                                                  @Field("passwordArtist") String passwordArtist,
                                                  @Field("newCategoryArtist") String newCategoryArtist);
+
+    @POST("UpdateDeleteCategory")
+    @FormUrlEncoded
+    Call<JsonElement> applyUpdateDeleteCategoryData(@Field("idArtist") String IDArtist,
+                                                    @Field("passwordArtist") String passwordArtist,
+                                                    @Field("targetCategoryArtist") String newCategoryArtist);
 }
