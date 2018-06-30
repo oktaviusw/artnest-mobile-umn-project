@@ -27,6 +27,11 @@ public interface APIService {
     @FormUrlEncoded
     Call<JsonElement> loginArtNest(@Field("Email") String emailUser,
                                    @Field("Password") String passwordUser);
+    @POST("RegisterUser")
+    @FormUrlEncoded
+    Call<JsonElement> registerArtNest(@Field("DisplayName") String username,
+                                        @Field("Email") String email,
+                                        @Field("Password") String password);
 
     @POST("UpdateUserData")
     Call<JsonElement> updateUserData(@Body RequestBody form);
