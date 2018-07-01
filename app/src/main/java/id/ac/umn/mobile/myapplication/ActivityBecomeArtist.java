@@ -3,6 +3,7 @@ package id.ac.umn.mobile.myapplication;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +17,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.gson.JsonElement;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
 
 public class ActivityBecomeArtist extends AppCompatActivity {
 
@@ -108,8 +117,39 @@ public class ActivityBecomeArtist extends AppCompatActivity {
             editAboutMe.setError("This Field is required");
         }
         else{
-
+            SubmitDataToServer();
         }
+    }
+
+    public void SubmitDataToServer(){
+        String sAboutMe = editAboutMe.getText().toString();
+        String sFBLink = editFBLink.getText().toString();
+        String sTWLink = editTWLink.getText().toString();
+
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        SharedPreferences pref = getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE);
+        String inputTargetID = pref.getString("UserID","");
+
+        builder.addFormDataPart("idArtist", inputTargetID);
+        builder.addFormDataPart("aboutMe", sAboutMe);
+        builder.addFormDataPart("facebookLink", sFBLink.replace(" ",""));
+        builder.addFormDataPart("twitterLink", sTWLink.replace(" ",""));
+
+        if(newBackgroundArtistPict){
+            File file = new File(mediaPathBackgroundArtistPicture);
+            RequestBody requestBodyFile = RequestBody.create(MediaType.parse("image/*"), file);
+
+            builder.addFormDataPart("imageData", file.getName(), requestBodyFile);
+        }
+
+        MultipartBody fileToPost = builder.build();
+
+        APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
+        Call<JsonElement> callBecomeArtist = webServiceAPI.updateUserData(fileToPost);
+
+
     }
 
     @Override
