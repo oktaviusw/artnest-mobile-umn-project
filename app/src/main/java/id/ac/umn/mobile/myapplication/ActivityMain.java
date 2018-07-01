@@ -256,7 +256,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             fragmentManager.beginTransaction().replace(R.id.main_content, new FragmentCommisionList()).commit();
         }
         else if(CURRENT_STATE.equals("BECOME_ARTIST")){
-            fragmentManager.beginTransaction().replace(R.id.main_content, new FragmentCreatePageProfile()).commit();
+            Intent intent = new Intent(getApplicationContext() , ActivityBecomeArtist.class);
+            startActivityForResult(intent, 2);
+            CURRENT_STATE = PREV_STATE;
         }
         else if(CURRENT_STATE.equals("SETTING_ACCOUNT")){
             //fragmentManager.beginTransaction().replace(R.id.main_content, new FragmentAccountSetting()).commit();
@@ -284,6 +286,11 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 2){
+
+        }
+
         ValidateNavigationDrawer();
         invalidateOptionsMenu();
     }

@@ -53,8 +53,7 @@ public class ActivitySetting extends AppCompatActivity {
     ImageView userProfilePicture;
     boolean newProfilePict;
 
-    String mediaPathBackroundArtistPicture;
-    Button BackroundArtistPicture;
+    String mediaPathBackgroundArtistPicture;
     boolean newBackgroundArtistPict;
 
     List<String> categoryList = new ArrayList<>();
@@ -214,7 +213,7 @@ public class ActivitySetting extends AppCompatActivity {
                     cursor.moveToFirst();
 
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    mediaPathBackroundArtistPicture = cursor.getString(columnIndex);
+                    mediaPathBackgroundArtistPicture = cursor.getString(columnIndex);
                     cursor.close();
 
                     // Set the Image in ImageView for Previewing the Media
