@@ -83,4 +83,6 @@ public interface APIService {
     Call<JsonElement> applyUpdateDeleteCategoryData(@Field("idArtist") String IDArtist,
                                                     @Field("passwordArtist") String passwordArtist,
                                                     @Field("targetCategoryArtist") String newCategoryArtist);
+
+    @POST("BecomeArtist") Call<JsonElement> becomeArtsist(@Body RequestBody file);
 }

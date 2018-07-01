@@ -72,6 +72,11 @@
             android:name=".ActivitySettingDeleteCategory"
             android:label="@string/title_activity_setting_delete_category"
             android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".ActivityBecomeArtist"
+            android:label="@string/title_activity_become_artist"
+            android:theme="@style/AppTheme"></activity>
+
     </application>
 
 </manifest>

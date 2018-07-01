@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -287,8 +288,10 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 2){
+        if(requestCode == 2){  //Add New Category Event
+            Toast.makeText(this, data.getData().toString(), Toast.LENGTH_LONG).show();
 
+            if(data.getData().toString().equals("SUCCESSFUL")) LoadUserData();
         }
 
         ValidateNavigationDrawer();

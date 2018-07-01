@@ -11,6 +11,7 @@
     <string name="title_activity_setting">Settings</string>
     <string name="title_activity_search_result">ActivitySearchResult</string>
     <string name="title_activity_create_commission">ActivityCreateCommission</string>
+    <string name="title_activity_become_artist">ActivityBecomeArtist</string>
     <string name="title_activity_setting_add_category">ActivitySettingAddCategory</string>
     <string name="title_activity_setting_delete_category">ActivitySettingDeleteCategory</string>
 </resources>

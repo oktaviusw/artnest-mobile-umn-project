@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -26,6 +27,8 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ActivityBecomeArtist extends AppCompatActivity {
 
@@ -43,7 +46,7 @@ public class ActivityBecomeArtist extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_become_artist);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -99,7 +102,7 @@ public class ActivityBecomeArtist extends AppCompatActivity {
 
                     // Set the Image in ImageView for Previewing the Media
                     newBackgroundArtistPict = true;
-                    Picasso.get().load(selectedImage).fit().centerCrop().transform(new PicassoCircleTransform()).into(imageBackgroundArtist);
+                    Picasso.get().load(selectedImage).fit().centerCrop().into(imageBackgroundArtist);
                 } else {
                     Toast.makeText(this, "You haven't picked Image for Profile Picture", Toast.LENGTH_LONG).show();
                 }
@@ -122,6 +125,9 @@ public class ActivityBecomeArtist extends AppCompatActivity {
     }
 
     public void SubmitDataToServer(){
+        progressDialog.setMessage("Processing your request");
+        progressDialog.show();
+
         String sAboutMe = editAboutMe.getText().toString();
         String sFBLink = editFBLink.getText().toString();
         String sTWLink = editTWLink.getText().toString();
@@ -147,15 +153,39 @@ public class ActivityBecomeArtist extends AppCompatActivity {
         MultipartBody fileToPost = builder.build();
 
         APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
-        Call<JsonElement> callBecomeArtist = webServiceAPI.updateUserData(fileToPost);
+        Call<JsonElement> callBecomeArtist = webServiceAPI.becomeArtsist(fileToPost);
 
+        callBecomeArtist.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+                    JsonElement element = response.body();
+                    JsonObject obj = element.getAsJsonObject();
+                    String status = obj.get("status").getAsString();
 
+                    if(status.equals("OK")){
+                        Intent data = new Intent();
+                        data.setData(Uri.parse("SUCCESSFUL"));
+                        setResult(RESULT_OK, data);
+
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
     public boolean onSupportNavigateUp(){
         Intent data = new Intent();
-        data.setData(Uri.parse("Become Artist Canceled"));
+        data.setData(Uri.parse("CANCELED"));
         setResult(RESULT_CANCELED, data);
 
         progressDialog.dismiss();
