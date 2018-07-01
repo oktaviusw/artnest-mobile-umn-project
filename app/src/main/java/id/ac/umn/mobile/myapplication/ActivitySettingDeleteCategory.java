@@ -74,7 +74,7 @@ public class ActivitySettingDeleteCategory extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp(){
         Intent data = new Intent();
-        data.setData(Uri.parse("Add Category canceled"));
+        data.setData(Uri.parse("Delete Category canceled"));
         setResult(RESULT_CANCELED, data);
 
         progressDialog.dismiss();
@@ -185,6 +185,7 @@ public class ActivitySettingDeleteCategory extends AppCompatActivity {
         callUpdateCategory.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                progressDialog.dismiss();
                 JsonElement element = response.body();
                 JsonObject obj = element.getAsJsonObject();
 
@@ -196,13 +197,13 @@ public class ActivitySettingDeleteCategory extends AppCompatActivity {
                     data.setData(Uri.parse(resultServer));
                     setResult(RESULT_OK, data);
 
-                    progressDialog.dismiss();
-
                     finish();
                 }
-                else{
-                    progressDialog.dismiss();
+                else if(statusServer.equals("ERROR")){
                     Toast.makeText(getApplicationContext(), resultServer, Toast.LENGTH_SHORT);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT);
                 }
             }
 
@@ -213,5 +214,4 @@ public class ActivitySettingDeleteCategory extends AppCompatActivity {
             }
         });
     }
-
 }
