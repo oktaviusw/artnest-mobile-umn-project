@@ -41,40 +41,19 @@ public class ModelCommissionInformation {
         this.sketchBaseAvailable = sketchBaseAvailable;
     }
 
-    public ModelCommissionInformation(String idCommission, String nameArtist, String statusRequest, String statusProject, String titleCommission, Date startDate, Date deadlineDate) {
-        this.idCommission = idCommission;
-        this.nameArtist = nameArtist;
-        this.statusRequest = statusRequest;
-        this.statusProject = statusProject;
-        this.titleCommission = titleCommission;
-        this.startDate = startDate;
-        this.deadlineDate = deadlineDate;
-    }
 
-    public ModelCommissionInformation(String idCommission, String idCustomer, String nameCustomer, String idArtist, String nameArtist, String statusRequest, String statusProject, int tokenValue, String titleCommission, Date startDate, Date deadlineDate) {
+    public ModelCommissionInformation(String idCommission, String idCustomer, String nameCustomer, String idArtist, String nameArtist, String statusRequest, int tokenValue, String titleCommission, Date startDate, Date deadlineDate, boolean sketchBaseAvailable) {
         this.idCommission = idCommission;
         this.idCustomer = idCustomer;
         this.nameCustomer = nameCustomer;
         this.idArtist = idArtist;
         this.nameArtist = nameArtist;
         this.statusRequest = statusRequest;
-        this.statusProject = statusProject;
         this.tokenValue = tokenValue;
         this.titleCommission = titleCommission;
         this.startDate = startDate;
         this.deadlineDate = deadlineDate;
-    }
-
-    public ModelCommissionInformation(String idCommission, String idCustomer, String nameCustomer, String idArtist, String nameArtist, int tokenValue, String titleCommission, Date startDate, Date deadlineDate) {
-        this.idCommission = idCommission;
-        this.idCustomer = idCustomer;
-        this.nameCustomer = nameCustomer;
-        this.idArtist = idArtist;
-        this.nameArtist = nameArtist;
-        this.tokenValue = tokenValue;
-        this.titleCommission = titleCommission;
-        this.startDate = startDate;
-        this.deadlineDate = deadlineDate;
+        this.sketchBaseAvailable = sketchBaseAvailable;
     }
 
     public String getIdCommission() {

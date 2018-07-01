@@ -43,10 +43,17 @@ public class FragmentCommisionList extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_commision_artist,container,false);
+        myView = inflater.inflate(R.layout.fragment_commision_customer,container,false);
+
+        progressDialog = new ProgressDialog(myView.getContext());
+        progressDialog.setMessage("Getting the results");
+
+        recyclerViewCommission = myView.findViewById(R.id.RV_commission_customer);
+        adapterCommissionList = new RVAListCommission(myView.getContext(),commissionData,"CommissionArtist");
+        adapterCommissionList.notifyDataSetChanged();
+        recyclerViewCommission.setAdapter(adapterCommissionList);
 
         seedData();
-
 
         return myView;
     }
@@ -72,7 +79,11 @@ public class FragmentCommisionList extends Fragment {
                         ModelCommissionInformation dataToList;
 
                         String sIDProject = singleData.get("IDProject").getAsString();
+                        String sIDCustomer = singleData.get("IDCustomer").getAsString();
+                        String sIDArtist = singleData.get("IDArtist").getAsString();
+                        String sCustomerName = singleData.get("CustomerName").getAsString();
                         String sTitleProject = singleData.get("TitleProject").getAsString();
+                        Integer sTokenValue = singleData.get("TokenValue").getAsInt();
                         String sArtistName = singleData.get("ArtistName").getAsString();
                         String sRequestStatus = singleData.get("RequestStatus").getAsString();
                         String sStartDate = singleData.get("DateStart").getAsString();
@@ -90,10 +101,10 @@ public class FragmentCommisionList extends Fragment {
 
                         if(sRequestStatus.equals("ACCEPTED")){
                             String sProjectStatus = singleData.get("CommissionStatus").getAsString();
-                            dataToList = new ModelCommissionInformation(sIDProject, sArtistName, sRequestStatus, sProjectStatus, sTitleProject, startDate, endDate, sAnySketch);
+                            dataToList = new ModelCommissionInformation(sIDProject, sIDCustomer, sCustomerName, sIDArtist, sArtistName, sRequestStatus, sTokenValue, sTitleProject, startDate, endDate, sAnySketch);
                         }
                         else{
-                            dataToList = new ModelCommissionInformation(sIDProject, sArtistName, sRequestStatus, sTitleProject, startDate, endDate, sAnySketch);
+                            dataToList = new ModelCommissionInformation(sIDProject, sIDCustomer, sCustomerName, sIDArtist, sArtistName, sRequestStatus, sTokenValue, sTitleProject, startDate, endDate, sAnySketch);
                         }
 
                         commissionData.add(dataToList);
