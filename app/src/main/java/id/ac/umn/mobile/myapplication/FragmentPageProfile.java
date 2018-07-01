@@ -179,6 +179,7 @@ public class FragmentPageProfile extends Fragment {
         ImageView profileImage = (ImageView) myView.findViewById(R.id.artist_display_picture);
         TextView completeProject = (TextView) myView.findViewById(R.id.completed_project);
         TextView displayName = (TextView) myView.findViewById(R.id.artist_display_name_text);
+        TextView email = (TextView) myView.findViewById(R.id.artist_email_text);
         TextView descArtist = (TextView) myView.findViewById(R.id.artist_about_me);
         TextView fbLink = (TextView) myView.findViewById(R.id.facebook_link_text);
         TextView twitterLink = (TextView) myView.findViewById(R.id.twitter_link_text);
@@ -191,6 +192,7 @@ public class FragmentPageProfile extends Fragment {
                 .memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().transform(new PicassoCircleTransform()).into(profileImage);
 
         displayName.setText(artistData.getName());
+        email.setText(artistData.getEmail());
         completeProject.setText(artistData.getTotalCompletedCommission().toString()+" Completed Works");
         fbLink.setText(artistData.getFbLink());
         twitterLink.setText(artistData.getTwitterLink());

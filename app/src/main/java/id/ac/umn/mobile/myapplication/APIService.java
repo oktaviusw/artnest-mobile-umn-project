@@ -84,5 +84,5 @@ public interface APIService {
                                                     @Field("passwordArtist") String passwordArtist,
                                                     @Field("targetCategoryArtist") String newCategoryArtist);
 
-    @POST("BecomeArtist") Call<JsonElement> becomeArtsist(@Body RequestBody file);
+    @POST("BecomeArtist") Call<JsonElement> becomeArtist(@Body RequestBody file);
 }

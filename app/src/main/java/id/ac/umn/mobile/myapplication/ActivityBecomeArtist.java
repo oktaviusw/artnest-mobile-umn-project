@@ -153,7 +153,7 @@ public class ActivityBecomeArtist extends AppCompatActivity {
         MultipartBody fileToPost = builder.build();
 
         APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
-        Call<JsonElement> callBecomeArtist = webServiceAPI.becomeArtsist(fileToPost);
+        Call<JsonElement> callBecomeArtist = webServiceAPI.becomeArtist(fileToPost);
 
         callBecomeArtist.enqueue(new Callback<JsonElement>() {
             @Override

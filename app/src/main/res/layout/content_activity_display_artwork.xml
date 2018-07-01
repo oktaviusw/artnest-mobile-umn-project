@@ -68,4 +68,35 @@
                 android:textSize="18sp"/>
         </LinearLayout>
     </ScrollView>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menu_artwork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="start"
+        android:visibility="gone"
+        app:menu_fab_size="normal"
+        app:menu_colorNormal="@color/colorPrimary"
+        app:menu_colorPressed="@color/colorPrimaryDark"
+        app:menu_openDirection="down">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_edit_artwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_label="Edit Artwork"
+            android:src="@drawable/ic_fab_action_edit_profile"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_delete_artwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_label="Delete Artwork"
+            android:src="@drawable/ic_fab_action_add_artwork"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
+
 </FrameLayout>

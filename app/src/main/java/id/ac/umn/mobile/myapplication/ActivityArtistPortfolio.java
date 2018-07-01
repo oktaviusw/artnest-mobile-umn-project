@@ -134,6 +134,7 @@ public class ActivityArtistPortfolio extends AppCompatActivity {
         ImageView profileImage = (ImageView) findViewById(R.id.artist_display_picture);
         TextView completeProject = (TextView) findViewById(R.id.completed_project);
         TextView displayName = (TextView) findViewById(R.id.artist_display_name_text);
+        TextView email = (TextView) findViewById(R.id.artist_email_text);
         TextView descArtist = (TextView) findViewById(R.id.artist_about_me);
         TextView fbLink = (TextView) findViewById(R.id.facebook_link_text);
         TextView twitterLink = (TextView) findViewById(R.id.twitter_link_text);
@@ -148,6 +149,7 @@ public class ActivityArtistPortfolio extends AppCompatActivity {
                 .memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().transform(new PicassoCircleTransform()).into(profileImage);
 
         displayName.setText(artistData.getName());
+        email.setText(artistData.getEmail());
         completeProject.setText(artistData.getTotalCompletedCommission().toString()+" Completed Works");
         fbLink.setText(artistData.getFbLink());
         twitterLink.setText(artistData.getTwitterLink());

@@ -2,9 +2,9 @@ package id.ac.umn.mobile.myapplication;
 
 import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -37,6 +39,9 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
     TextView titleArtwork;
     TextView descArtwork;
     TextView artistName;
+    FloatingActionMenu artworkEditMenu;
+    FloatingActionButton artworkEditButton;
+    FloatingActionButton artworkDeleteButton;
 
     ProgressDialog progressDialog;
 
@@ -55,6 +60,9 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
         titleArtwork = (TextView) findViewById(R.id.title_artwork);
         descArtwork = (TextView) findViewById(R.id.artwork_description);
         artistName = (TextView) findViewById(R.id.artist_display_name);
+        artworkEditMenu = (FloatingActionMenu) findViewById(R.id.fab_menu_artwork);
+        artworkEditButton = (FloatingActionButton) findViewById(R.id.fab_edit_artwork);
+        artworkDeleteButton = (FloatingActionButton) findViewById(R.id.fab_delete_artwork);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching Artwork Data");
@@ -115,6 +123,13 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
 
         Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/userdata/"+data.getEmailArtist()+"/ProfilePicture.png").fit().centerCrop()
                 .transform(new PicassoCircleTransform()).into(profileImage);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE);
+        String idUser = pref.getString("UserID","");
+
+        if(idUser.equals(data.getIdArtist())){
+            artworkEditMenu.setVisibility(View.VISIBLE);
+        }
 
         progressDialog.hide();
     }

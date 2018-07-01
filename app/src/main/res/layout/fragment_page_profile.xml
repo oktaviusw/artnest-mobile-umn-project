@@ -41,6 +41,13 @@
                     android:textSize="30sp"
                     android:textAlignment="center"
                     android:textColor="#000"/>
+                <TextView
+                    android:id="@+id/artist_email_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="artist@email.com"
+                    android:textAlignment="center"
+                    android:textSize="18sp"/>
                 <RatingBar
                     style="@style/Base.Widget.AppCompat.RatingBar"
                     android:layout_width="250dp"
