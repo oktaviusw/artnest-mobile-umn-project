@@ -79,6 +79,10 @@
         <activity
             android:name=".ActivityCommissionDetail"
             android:label="@string/title_activity_commission_detail"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ActivityEditArtwork"
+            android:label="@string/title_activity_edit_artwork"
             android:theme="@style/AppTheme"></activity>
     </application>
 

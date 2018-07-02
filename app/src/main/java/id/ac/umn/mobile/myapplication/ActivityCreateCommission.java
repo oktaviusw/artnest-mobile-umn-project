@@ -188,7 +188,7 @@ public class ActivityCreateCommission extends AppCompatActivity {
                     String strEndDate = dateFormat.format(endDate);
 
                     UploadDataToServer(sArtist, sCustomer, sTitle, sPrice, sDesc, strStartDate, strEndDate);
-                    Toast.makeText(this, sTitle+"\n"+sCustomer+"\n"+sPrice+"\n"+sDesc+"\n"+sStartDate+"\n"+sEndDate, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, sTitle+"\n"+sCustomer+"\n"+sPrice+"\n"+sDesc+"\n"+sStartDate+"\n"+sEndDate, Toast.LENGTH_LONG).show();
                 }
             }
         }
