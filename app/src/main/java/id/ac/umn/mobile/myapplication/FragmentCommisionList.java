@@ -43,7 +43,7 @@ public class FragmentCommisionList extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_commision_customer,container,false);
+        myView = inflater.inflate(R.layout.fragment_commision_artist,container,false);
 
         progressDialog = new ProgressDialog(myView.getContext());
         progressDialog.setMessage("Getting the results");
