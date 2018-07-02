@@ -54,6 +54,12 @@ public interface APIService {
     @POST("AddNewArtwork")
     Call<JsonElement> addNewArtwork(@Body RequestBody file);
 
+    @POST("UpdateArtworkData")
+    @FormUrlEncoded
+    Call<JsonElement> updateArtwork(@Field("IDTarget") String idTarget,
+                                    @Field("NewTitle") String newTitle,
+                                    @Field("NewDesc") String newDesc);
+
     @GET("GetAllCategories")
     Call<JsonElement> getCategories();
 

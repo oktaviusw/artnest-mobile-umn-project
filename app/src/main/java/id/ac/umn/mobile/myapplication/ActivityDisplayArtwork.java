@@ -136,6 +136,7 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext() , ActivityEditArtwork.class);
+                    intent.putExtra( "idArtwork", data.getId());
                     startActivityForResult(intent, 1);
                 }
             });
@@ -143,6 +144,7 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext() , ActivityDeleteArtwork.class);
+                    intent.putExtra( "idArtwork", data.getId());
                     startActivityForResult(intent, 2);
                 }
             });
@@ -156,6 +158,7 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode==1){
+            Toast.makeText(this, data.getData().toString(), Toast.LENGTH_LONG).show();
             if(resultCode==RESULT_OK){
                 seedDataArtwork();
             }
@@ -163,6 +166,9 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
         else if(requestCode==2){
             if(resultCode==RESULT_OK){
                 finish();
+            }
+            else{
+                Toast.makeText(this, data.getData().toString(), Toast.LENGTH_LONG).show();
             }
         }
     }
