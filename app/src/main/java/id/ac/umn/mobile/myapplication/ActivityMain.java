@@ -262,7 +262,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             CURRENT_STATE = PREV_STATE;
         }
         else if(CURRENT_STATE.equals("SETTING_ACCOUNT")){
-            //fragmentManager.beginTransaction().replace(R.id.main_content, new FragmentAccountSetting()).commit();
             Intent intent = new Intent(getApplicationContext() , ActivitySetting.class);
             startActivityForResult(intent, 1);
             CURRENT_STATE = PREV_STATE;
@@ -275,14 +274,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         }
         invalidateOptionsMenu();
     }
-
-    /*
-    @Override
-    protected void onResume() {
-        super.onResume();
-        recreate();
-    }
-    */
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

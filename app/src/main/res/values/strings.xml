@@ -16,4 +16,5 @@
     <string name="title_activity_setting_delete_category">ActivitySettingDeleteCategory</string>
     <string name="title_activity_commission_detail">ActivityCommissionDetail</string>
     <string name="title_activity_edit_artwork">ActivityEditArtwork</string>
+    <string name="title_activity_delete_artwork">ActivityDeleteArtwork</string>
 </resources>

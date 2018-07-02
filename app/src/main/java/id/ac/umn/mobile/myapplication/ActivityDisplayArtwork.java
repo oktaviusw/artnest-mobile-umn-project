@@ -1,7 +1,9 @@
 package id.ac.umn.mobile.myapplication;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -108,7 +111,7 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT);
             }
         });
 
@@ -129,8 +132,38 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
 
         if(idUser.equals(data.getIdArtist())){
             artworkEditMenu.setVisibility(View.VISIBLE);
+            artworkEditButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext() , ActivityEditArtwork.class);
+                    startActivityForResult(intent, 1);
+                }
+            });
+            artworkDeleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext() , ActivityDeleteArtwork.class);
+                    startActivityForResult(intent, 2);
+                }
+            });
         }
 
         progressDialog.hide();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==1){
+            if(resultCode==RESULT_OK){
+                seedDataArtwork();
+            }
+        }
+        else if(requestCode==2){
+            if(resultCode==RESULT_OK){
+                finish();
+            }
+        }
     }
 }
