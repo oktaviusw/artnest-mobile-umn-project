@@ -99,9 +99,10 @@ public class FragmentCommisionList extends Fragment {
                             e.printStackTrace();
                         }
 
+                        String sProjectStatus;
                         if(sRequestStatus.equals("ACCEPTED")){
-                            String sProjectStatus = singleData.get("CommissionStatus").getAsString();
-                            dataToList = new ModelCommissionInformation(sIDProject, sIDCustomer, sCustomerName, sIDArtist, sArtistName, sRequestStatus, sTokenValue, sTitleProject, startDate, endDate, sAnySketch);
+                            sProjectStatus = singleData.get("CommissionStatus").getAsString();
+                            dataToList = new ModelCommissionInformation(sIDProject, sIDCustomer, sCustomerName, sIDArtist, sArtistName, sRequestStatus, sProjectStatus, sTokenValue, sTitleProject, startDate, endDate, sAnySketch);
                         }
                         else{
                             dataToList = new ModelCommissionInformation(sIDProject, sIDCustomer, sCustomerName, sIDArtist, sArtistName, sRequestStatus, sTokenValue, sTitleProject, startDate, endDate, sAnySketch);

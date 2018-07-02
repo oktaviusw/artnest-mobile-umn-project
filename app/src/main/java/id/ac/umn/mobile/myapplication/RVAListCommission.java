@@ -1,6 +1,7 @@
 package id.ac.umn.mobile.myapplication;
 
 import android.content.Context;
+import android.os.Debug;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,7 +47,10 @@ public class RVAListCommission extends RecyclerView.Adapter<RVAListCommission.Vi
         ModelCommissionInformation singleData = dataCommmisions.get(position);
 
         if(singleData.isSketchBaseAvailable()){
-            Picasso.get().load("R.drawable.application_logo.png").fit().centerCrop().into(holder.commissionImage);
+            Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/projectdata/"+singleData.getIdCommission()+"/SketchBase.jpg").fit().centerCrop().into(holder.commissionImage);
+        }
+        else if (!singleData.isSketchBaseAvailable()){
+            Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/template/ProfilePicture.png").fit().centerCrop().into(holder.commissionImage);
         }
 
         holder.commissionTitle.setText(singleData.getTitleCommission());
@@ -59,6 +63,23 @@ public class RVAListCommission extends RecyclerView.Adapter<RVAListCommission.Vi
         }else if(type.equals("CommissionArtist")){
             holder.userName.setText("For "+singleData.getNameCustomer());
         }
+        if(singleData.getStatusRequest().equals("PENDING")){
+            holder.commissionStatus.setText("Waiting for Confirmation");
+        }
+        else if(singleData.getStatusRequest().equals("ACCEPTED")){
+            if(singleData.getStatusProject().equals("PROGRESS")){
+                holder.commissionStatus.setText("On Going");
+            }
+            else if(singleData.getStatusProject().equals("FINISHED")){
+                holder.commissionStatus.setText("Completed");
+            }
+            else if(singleData.getStatusProject().equals("CANCELED")){
+                holder.commissionStatus.setText("Terminated");
+            }
+        }
+        else if(singleData.getStatusRequest().equals("DECLINED")){
+            holder.commissionStatus.setText("Expired");
+        }
     }
 
     @Override
@@ -70,14 +91,15 @@ public class RVAListCommission extends RecyclerView.Adapter<RVAListCommission.Vi
 
         FrameLayout parentLayout;
         ImageView commissionImage;
-        TextView commissionTitle, userName, commissionDate;
+        TextView commissionTitle, userName, commissionDate, commissionStatus;
 
         public ViewHolder(View itemView){
             super(itemView);
 
             parentLayout = (FrameLayout) itemView.findViewById(R.id.parentCardLayout);
-            commissionImage = (ImageView) parentLayout.findViewById(R.id.commission_sketch_base);
+            commissionImage = (ImageView) parentLayout.findViewById(R.id.commission_sketch_base_project);
             commissionTitle = (TextView) parentLayout.findViewById(R.id.commission_title);
+            commissionStatus = (TextView) parentLayout.findViewById(R.id.commission_status);
             commissionDate = (TextView) parentLayout.findViewById(R.id.commission_date);
             userName = (TextView) parentLayout.findViewById(R.id.user_name);
         }

@@ -112,6 +112,9 @@ public class ActivityAddArtwork extends AppCompatActivity {
         EditText titleArtworkEdit = (EditText) findViewById(R.id.title_new_artwork);
         final String titleArtwork = titleArtworkEdit.getText().toString();
 
+        EditText descArtworkEdit = (EditText) findViewById(R.id.desc_new_artwork);
+        final String descArtwork = descArtworkEdit.getText().toString();
+
         SharedPreferences pref = getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE);
         APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
         Call<JsonElement> callUser = webServiceAPI.getUserdata(pref.getString("UserID",""));
@@ -127,7 +130,7 @@ public class ActivityAddArtwork extends AppCompatActivity {
                     String artistID = singleData.get("IDUser").getAsString();
                     String artistEmail = singleData.get("EMail").getAsString();
 
-                    UploadToServerAPI(artistID, artistEmail, titleArtwork);
+                    UploadToServerAPI(artistID, artistEmail, titleArtwork, descArtwork);
                 }
             }
 
@@ -138,7 +141,7 @@ public class ActivityAddArtwork extends AppCompatActivity {
         });
     }
 
-    public void UploadToServerAPI(String artistID, String artistEmail, String titleArtwork){
+    public void UploadToServerAPI(String artistID, String artistEmail, String titleArtwork, String descArtwork){
         File file = new File(mediaPath);
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
@@ -148,6 +151,7 @@ public class ActivityAddArtwork extends AppCompatActivity {
 
         builder.addFormDataPart("artistEmail", artistEmail);
         builder.addFormDataPart("artworkTitle", titleArtwork);
+        builder.addFormDataPart("artworkDesc", descArtwork);
         builder.addFormDataPart("artistID", artistID);
         builder.addFormDataPart("imageData", file.getName(), requestBody);
 

@@ -50,10 +50,11 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:text="Title Artwork"
+                            android:text="Title"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:textSize="15sp"/>
 
                         <EditText
                             android:id="@+id/title_new_artwork"
@@ -66,12 +67,36 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="Description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"/>
+
+                        <EditText
+                            android:id="@+id/desc_new_artwork"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"
+                            android:lines="10"
+                            android:maxLines="10"
+                            android:minLines="3"
+                            android:scrollbars="vertical"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:text="Preview Artwork"
+                            android:text="Preview"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:textSize="15sp"
                             android:layout_weight="1"/>
 
                         <Button
