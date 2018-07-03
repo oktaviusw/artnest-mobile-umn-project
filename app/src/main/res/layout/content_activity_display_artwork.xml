@@ -82,20 +82,20 @@
         app:menu_openDirection="down">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab_edit_artwork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/colorPrimary"
-            app:fab_label="Edit Artwork"
-            android:src="@drawable/ic_fab_action_edit_profile"/>
-
-        <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_delete_artwork"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimary"
             app:fab_label="Delete Artwork"
-            android:src="@drawable/ic_fab_action_add_artwork"/>
+            android:src="@drawable/ic_action_artwork_delete"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_edit_artwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_label="Edit Artwork"
+            android:src="@drawable/ic_action_artwork_edit"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 

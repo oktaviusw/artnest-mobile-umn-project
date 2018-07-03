@@ -165,6 +165,7 @@ public class ActivityDisplayArtwork extends AppCompatActivity {
         }
         else if(requestCode==2){
             if(resultCode==RESULT_OK){
+                Toast.makeText(this, data.getData().toString(), Toast.LENGTH_LONG).show();
                 finish();
             }
             else{

@@ -45,6 +45,9 @@ public interface APIService {
     @GET("LoadArtistData/{id}")
     Call<JsonElement> getArtist(@Path("id") String id);
 
+    @POST("UpdateArtistData")
+    Call<JsonElement> updateArtistData(@Body RequestBody form);
+
     @GET("ShowAllArtworks")
     Call<JsonElement> getAllArtworksData();
 
@@ -59,6 +62,9 @@ public interface APIService {
     Call<JsonElement> updateArtwork(@Field("IDTarget") String idTarget,
                                     @Field("NewTitle") String newTitle,
                                     @Field("NewDesc") String newDesc);
+
+    @GET("DeleteArtwork/{id}")
+    Call<JsonElement> deleteArtwork(@Path("id") String id);
 
     @GET("GetAllCategories")
     Call<JsonElement> getCategories();

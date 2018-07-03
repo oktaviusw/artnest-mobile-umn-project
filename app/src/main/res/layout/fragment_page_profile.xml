@@ -48,21 +48,13 @@
                     android:text="artist@email.com"
                     android:textAlignment="center"
                     android:textSize="18sp"/>
-                <RatingBar
-                    style="@style/Base.Widget.AppCompat.RatingBar"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_horizontal"
-                    android:isIndicator="true"
-                    android:numStars="5"
-                    android:rating="4"
-                    android:theme="@style/RatingBar" />
                 <TextView
                     android:id="@+id/completed_project"
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="xx Completed Works"
+                    android:textColor="#0f0f0f"
                     android:textSize="20sp"
                     android:textAlignment="center"/>
                 <TextView

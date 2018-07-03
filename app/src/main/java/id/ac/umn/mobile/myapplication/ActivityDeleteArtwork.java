@@ -12,10 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,8 +30,8 @@ public class ActivityDeleteArtwork extends AppCompatActivity {
     ModelArtworkInformation data;
 
     ImageView artworkImage;
-    EditText titleArtwork;
-    EditText descArtwork;
+    TextView titleArtwork;
+    TextView descArtwork;
     Button btnConfirmDelete;
     Button btnCancelDelete;
 
@@ -44,8 +48,8 @@ public class ActivityDeleteArtwork extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         artworkImage = (ImageView) findViewById(R.id.artwork_display);
-        titleArtwork = (EditText) findViewById(R.id.artwork_title);
-        descArtwork = (EditText) findViewById(R.id.artwork_description);
+        titleArtwork = (TextView) findViewById(R.id.artwork_title);
+        descArtwork = (TextView) findViewById(R.id.artwork_description);
         btnConfirmDelete = (Button) findViewById(R.id.btn_confirm_delete);
         btnCancelDelete = (Button) findViewById(R.id.btn_cancel_delete);
 
@@ -116,7 +120,37 @@ public class ActivityDeleteArtwork extends AppCompatActivity {
         btnConfirmDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                String idArtwork = data.getId();
+                APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
+                Call<JsonElement> callArtwork = webServiceAPI.deleteArtwork(idArtwork);
+
+                callArtwork.enqueue(new Callback<JsonElement>() {
+                    @Override
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        if(response.isSuccessful()){
+                            JsonElement element = response.body();
+                            JsonObject obj = element.getAsJsonObject();
+                            String statusServer = obj.get("status").getAsString();
+                            String resultServer = obj.get("result").getAsString();
+
+                            if(statusServer.equals("OK")){
+                                Intent data = new Intent();
+                                data.setData(Uri.parse(resultServer));
+                                setResult(RESULT_OK,data);
+                                progressDialog.dismiss();
+                                finish();
+                            }
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Something Went Wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),"Something Went Wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
