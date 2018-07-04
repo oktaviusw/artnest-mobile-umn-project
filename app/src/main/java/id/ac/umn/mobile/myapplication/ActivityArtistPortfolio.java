@@ -100,8 +100,9 @@ public class ActivityArtistPortfolio extends AppCompatActivity {
                     String artistEMail = singleData.get("EMail").getAsString();
                     String artistFBLink = singleData.get("FacebookLink").getAsString();
                     String artistTWLink = singleData.get("TwitterLink").getAsString();
+                    Integer artistWorks = singleData.get("CompletedWorks").getAsInt();
 
-                    artistData = new ModelArtistInformation(artistID, artistName, artistEMail, artistDesc, artistFBLink, artistTWLink, 0);
+                    artistData = new ModelArtistInformation(artistID, artistName, artistEMail, artistDesc, artistFBLink, artistTWLink, artistWorks);
 
                     JsonArray categoryMultipleData = singleData.get("Categories").getAsJsonArray();
                     for(int i = 0; i < categoryMultipleData.size(); i++){
@@ -153,8 +154,20 @@ public class ActivityArtistPortfolio extends AppCompatActivity {
         displayName.setText(artistData.getName());
         email.setText(artistData.getEmail());
         completeProject.setText(artistData.getTotalCompletedCommission().toString()+" Completed Works");
-        fbLink.setText(artistData.getFbLink());
-        twitterLink.setText(artistData.getTwitterLink());
+
+        if(artistData.getFbLink().substring(25).equals("")){
+            fbLink.setVisibility(View.GONE);
+        }
+        else{
+            fbLink.setText(artistData.getFbLink());
+        }
+
+        if(artistData.getTwitterLink().substring(24).equals("")){
+            twitterLink.setVisibility(View.GONE);
+        }
+        else{
+            twitterLink.setText(artistData.getTwitterLink());
+        }
         descArtist.setText(artistData.getDesc());
 
         for(int i = 0; i < categoryList.size() ; i++){
@@ -192,7 +205,6 @@ public class ActivityArtistPortfolio extends AppCompatActivity {
 
                 Intent mailClient = new Intent(Intent.ACTION_SENDTO);
                 mailClient.setData(Uri.parse(mailto));
-                //mailClient.setClassName("com.google.android.gm", "com.google.android.gm.ConversationListActivity");
                 startActivity(mailClient);
             }
         });

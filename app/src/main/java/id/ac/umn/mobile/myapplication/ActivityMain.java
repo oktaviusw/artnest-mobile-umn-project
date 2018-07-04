@@ -85,6 +85,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
+        CURRENT_STATE = "HOME";
+        LoadMainFragment();
     }
 
     @Override

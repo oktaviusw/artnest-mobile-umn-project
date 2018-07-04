@@ -1,14 +1,18 @@
 package id.ac.umn.mobile.myapplication;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,6 +56,9 @@ public class ActivityCommissionDetail extends AppCompatActivity {
     ImageView customerProfilePict;
     TextView customerName;
 
+    Button acceptCommission;
+    Button declineCommission;
+
     ProgressDialog progressDialog;
 
     @Override
@@ -79,6 +86,9 @@ public class ActivityCommissionDetail extends AppCompatActivity {
 
         customerProfilePict = (ImageView)  findViewById(R.id.commission_customer_pict);
         customerName = (TextView) findViewById(R.id.commission_customer_name);
+
+        acceptCommission = (Button) findViewById(R.id.btn_accept);
+        declineCommission = (Button) findViewById(R.id.btn_decline);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching Commission Data");
@@ -177,7 +187,7 @@ public class ActivityCommissionDetail extends AppCompatActivity {
             else if (projectStatus.equals("FINISHED")){
                 commissionStatus.setText("Completed");
             }
-            else if(projectStatus.equals("CANCELED")){
+            else if(projectStatus.equals("CANCELLED")){
                 commissionStatus.setText("Terminated");
             }
         }
@@ -185,7 +195,7 @@ public class ActivityCommissionDetail extends AppCompatActivity {
             commissionStatus.setText("Waiting for Confirmation");
         }
 
-        commissionPrice.setText(String.valueOf(data.getTokenValue()));
+        commissionPrice.setText("Rp. "+String.valueOf(data.getTokenValue())+",-");
 
         if(data.getDescriptionProject().equals("")){
             commissionDescCard.setVisibility(View.GONE);
@@ -217,6 +227,82 @@ public class ActivityCommissionDetail extends AppCompatActivity {
         Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/userdata/"+emailCustomer+"/ProfilePicture.png")
                 .memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().transform(new PicassoCircleTransform()).into(customerProfilePict);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE);
+        String idUser = pref.getString("UserID","");
+
+        if(idUser.equals(data.getIdArtist())){
+            acceptCommission.setVisibility(View.GONE);
+            declineCommission.setVisibility(View.GONE);
+        }
+
+        if(data.getStatusRequest().equals("PENDING")){
+            acceptCommission.setText("Accept Commission");
+            declineCommission.setText("Reject Commission");
+        }
+        else if(data.getStatusRequest().equals("ACCEPTED")){
+            if(data.getStatusProject().equals("PROGRESS")){
+                acceptCommission.setText("Complete Commission");
+                declineCommission.setText("Cancel Commission");
+            }else{
+                acceptCommission.setVisibility(View.GONE);
+                declineCommission.setVisibility(View.GONE);
+            }
+        }
+
+        acceptCommission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ResponseToCommission("ACCEPT");
+            }
+        });
+
+        declineCommission.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ResponseToCommission("DECLINE");
+            }
+        });
         progressDialog.hide();
+    }
+
+    public void ResponseToCommission(String response){
+        progressDialog.setMessage("Sending your response");
+        progressDialog.show();
+
+        String sID = data.getIdCommission();
+
+        APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
+        Call<JsonElement> callCommission = webServiceAPI.responseCommission(sID,response);
+
+        callCommission.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                if(response.isSuccessful()){
+                    JsonElement element = response.body();
+                    JsonObject obj = element.getAsJsonObject();
+                    String status = obj.get("status").getAsString();
+                    if(status.equals("OK")){
+                        Toast.makeText(getApplicationContext(), "Response Submitted", Toast.LENGTH_SHORT).show();
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent returnIntent = new Intent();
+                                setResult(Activity.RESULT_OK, returnIntent);
+                                finish();
+                            }
+                        }, 1000);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT);
+            }
+        });
     }
 }

@@ -294,6 +294,7 @@ public class ActivitySetting extends AppCompatActivity {
     }
 
     public void LoadUserData(){
+        progressDialog.setMessage("Fetching Data");
         progressDialog.show();
         final EditText editDisplayName = findViewById(R.id.edit_text_display_name);
         final ImageView editImageView = findViewById(R.id.edit_image_display_picture);
@@ -506,7 +507,7 @@ public class ActivitySetting extends AppCompatActivity {
                     ModelArtistInformation artistData = new ModelArtistInformation(artistID, artistName, artistEMail, artistDesc, artistFBLink, artistTWLink, 0);
 
                     String fbLinkEditable = artistData.getFbLink().substring(25);
-                    String twitterLinkEditable = artistData.getTwitterLink().substring(20);
+                    String twitterLinkEditable = artistData.getTwitterLink().substring(24);
                     Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/userdata/"+artistData.getEmail()+"/BackgroundProfile.jpg")
                             .fit().centerCrop().into(editBackgroundImageView);
                     LoadArtistCategories();
@@ -557,6 +558,81 @@ public class ActivitySetting extends AppCompatActivity {
     }
 
     public void ValidateUpdateArtistInfo(){
+        progressDialog.setMessage("Updating Profile");
+        progressDialog.show();
+
+        EditText editTextPasswordAuth = (EditText) findViewById(R.id.edit_current_password_artist);
+
+        if(editTextPasswordAuth.getText().toString().length() == 0){
+            progressDialog.dismiss();
+            editTextPasswordAuth.setError("Password should not be empty");
+        }
+        else{
+            UploadArtistInfoToServer();
+        }
+    }
+
+    public void UploadArtistInfoToServer(){
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+
+        SharedPreferences pref = getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE);
+        String inputTargetID = pref.getString("UserID","");
+        builder.addFormDataPart("IDTarget", inputTargetID);
+
+        EditText editAboutMe = (EditText) findViewById(R.id.edit_about_me_artist);
+        String sAboutMe = editAboutMe.getText().toString();
+        builder.addFormDataPart("AboutMe", sAboutMe);
+
+        EditText editFBLink = (EditText) findViewById(R.id.edit_fb_link);
+        String sFBLink = editFBLink.getText().toString();
+        builder.addFormDataPart("FbLink", sFBLink);
+
+        EditText editTWLink = (EditText) findViewById(R.id.edit_twitter_link);
+        String sTWLink = editTWLink.getText().toString();
+        builder.addFormDataPart("TwLink", sTWLink);
+
+        EditText editPasswordAuth = (EditText) findViewById(R.id.edit_current_password_artist);
+        String sPassword = editPasswordAuth.getText().toString();
+        builder.addFormDataPart("PasswordAuth", sPassword);
+
+        if(newBackgroundArtistPict){
+            File file = new File(mediaPathBackgroundArtistPicture);
+            RequestBody requestBodyFile = RequestBody.create(MediaType.parse("image/*"), file);
+
+            builder.addFormDataPart("imageData", file.getName(), requestBodyFile);
+        }
+
+        MultipartBody fileToPost = builder.build();
+
+        APIService webServiceAPI = APIClient.getApiClient().create(APIService.class);
+        Call<JsonElement> callUpdateArtistData = webServiceAPI.updateArtistData(fileToPost);
+
+        callUpdateArtistData.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+                    JsonElement element = response.body();
+                    JsonObject obj = element.getAsJsonObject();
+                    String status = obj.get("status").getAsString();
+
+                    progressDialog.dismiss();
+                    System.out.println(obj.get("result").getAsString());
+                    Toast.makeText(getApplicationContext(), obj.get("result").getAsString(), Toast.LENGTH_SHORT).show();
+                    LoadUserData();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }

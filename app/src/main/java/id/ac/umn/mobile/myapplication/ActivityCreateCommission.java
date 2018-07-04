@@ -195,6 +195,9 @@ public class ActivityCreateCommission extends AppCompatActivity {
     }
 
     public void UploadDataToServer(String artistID, String customerEmail, String titleProject, String price, String description, String startDate, String endDate){
+        progressDialog.setMessage("Creating your order");
+        progressDialog.show();
+
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
 
@@ -232,6 +235,7 @@ public class ActivityCreateCommission extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                progressDialog.dismiss();
                                 Intent returnIntent = new Intent();
                                 setResult(Activity.RESULT_OK, returnIntent);
                                 finish();
@@ -239,6 +243,7 @@ public class ActivityCreateCommission extends AppCompatActivity {
                         }, 1000);
                     }
                     else {
+                        progressDialog.hide();
                         System.out.println(object.get("result").getAsString());
                         Toast.makeText(getApplicationContext(), object.get("result").getAsString(), Toast.LENGTH_LONG).show();
                     }
@@ -248,7 +253,8 @@ public class ActivityCreateCommission extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
-
+                progressDialog.hide();
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
             }
         });
 

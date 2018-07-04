@@ -48,6 +48,24 @@ public interface APIService {
     @POST("UpdateArtistData")
     Call<JsonElement> updateArtistData(@Body RequestBody form);
 
+    @POST("BecomeArtist")
+    Call<JsonElement> becomeArtist(@Body RequestBody file);
+
+    @GET("GetAvailableCategory/{id}")
+    Call<JsonElement> getAvailableCategoryData(@Path("id") String id);
+
+    @POST("UpdateAddCategory")
+    @FormUrlEncoded
+    Call<JsonElement> applyUpdateAddCategoryData(@Field("idArtist") String IDArtist,
+                                                 @Field("passwordArtist") String passwordArtist,
+                                                 @Field("newCategoryArtist") String newCategoryArtist);
+
+    @POST("UpdateDeleteCategory")
+    @FormUrlEncoded
+    Call<JsonElement> applyUpdateDeleteCategoryData(@Field("idArtist") String IDArtist,
+                                                    @Field("passwordArtist") String passwordArtist,
+                                                    @Field("targetCategoryArtist") String newCategoryArtist);
+
     @GET("ShowAllArtworks")
     Call<JsonElement> getAllArtworksData();
 
@@ -82,22 +100,12 @@ public interface APIService {
     @GET("LoadCommissionData/{id}")
     Call<JsonElement> getCommission(@Path("id") String id);
 
-    @POST("AddNewCommission") Call<JsonElement> addNewCommission(@Body RequestBody file);
+    @POST("AddNewCommission")
+    Call<JsonElement> addNewCommission(@Body RequestBody file);
 
-    @GET("GetAvailableCategory/{id}")
-    Call<JsonElement> getAvailableCategoryData(@Path("id") String id);
-
-    @POST("UpdateAddCategory")
+    @POST("RespondToCommission")
     @FormUrlEncoded
-    Call<JsonElement> applyUpdateAddCategoryData(@Field("idArtist") String IDArtist,
-                                                 @Field("passwordArtist") String passwordArtist,
-                                                 @Field("newCategoryArtist") String newCategoryArtist);
+    Call<JsonElement> responseCommission(@Field("projectID")String idTarget,
+                                         @Field("responseCustomer") String response);
 
-    @POST("UpdateDeleteCategory")
-    @FormUrlEncoded
-    Call<JsonElement> applyUpdateDeleteCategoryData(@Field("idArtist") String IDArtist,
-                                                    @Field("passwordArtist") String passwordArtist,
-                                                    @Field("targetCategoryArtist") String newCategoryArtist);
-
-    @POST("BecomeArtist") Call<JsonElement> becomeArtist(@Body RequestBody file);
 }

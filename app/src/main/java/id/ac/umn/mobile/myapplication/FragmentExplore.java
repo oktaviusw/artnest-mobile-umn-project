@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -87,7 +88,7 @@ public class FragmentExplore extends Fragment {
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
-
+                Toast.makeText(myView.getContext(), "Something went wrong", Toast.LENGTH_SHORT);
             }
         });
 

@@ -140,8 +140,9 @@ public class FragmentPageProfile extends Fragment {
                     String artistEMail = singleData.get("EMail").getAsString();
                     String artistFBLink = singleData.get("FacebookLink").getAsString();
                     String artistTWLink = singleData.get("TwitterLink").getAsString();
+                    Integer artistWorks = singleData.get("CompletedWorks").getAsInt();
 
-                    artistData = new ModelArtistInformation(artistID, artistName, artistEMail, artistDesc, artistFBLink, artistTWLink, 0);
+                    artistData = new ModelArtistInformation(artistID, artistName, artistEMail, artistDesc, artistFBLink, artistTWLink, artistWorks);
 
                     categoryList.clear();
                     JsonArray categoryMultipleData = singleData.get("Categories").getAsJsonArray();
@@ -194,8 +195,19 @@ public class FragmentPageProfile extends Fragment {
         displayName.setText(artistData.getName());
         email.setText(artistData.getEmail());
         completeProject.setText(artistData.getTotalCompletedCommission().toString()+" Completed Works");
-        fbLink.setText(artistData.getFbLink());
-        twitterLink.setText(artistData.getTwitterLink());
+        if(artistData.getFbLink().substring(25).equals("")){
+            fbLink.setVisibility(View.GONE);
+        }
+        else{
+            fbLink.setText(artistData.getFbLink());
+        }
+
+        if(artistData.getTwitterLink().substring(24).equals("")){
+            twitterLink.setVisibility(View.GONE);
+        }
+        else{
+            twitterLink.setText(artistData.getTwitterLink());
+        }
         descArtist.setText(artistData.getDesc());
 
         float conversionDP = myView.getContext().getResources().getDisplayMetrics().density;

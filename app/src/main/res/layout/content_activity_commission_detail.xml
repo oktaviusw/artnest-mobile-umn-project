@@ -45,7 +45,7 @@
                         android:text="Title Commission"
                         android:textAlignment="center"
                         android:textColor="#0f0f0f"
-                        android:textSize="20sp"
+                        android:textSize="24sp"
                         android:textStyle="bold"/>
 
                     <!--Date-->
@@ -77,6 +77,7 @@
                             android:layout_weight="2"
                             android:layout_gravity="center_vertical"
                             android:text="Drawn By"
+                            android:textColor="#0f0f0f"
                             android:textStyle="bold"/>
 
                         <LinearLayout
@@ -88,6 +89,7 @@
 
                             <ImageView
                                 android:id="@+id/commission_artist_pict"
+                                android:padding="4dp"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:src="@drawable/application_logo"/>
@@ -113,6 +115,7 @@
                             android:layout_weight="2"
                             android:layout_gravity="center_vertical"
                             android:text="Requested By"
+                            android:textColor="#0f0f0f"
                             android:textStyle="bold"/>
 
                         <LinearLayout
@@ -124,6 +127,7 @@
 
                             <ImageView
                                 android:id="@+id/commission_customer_pict"
+                                android:padding="4dp"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:src="@drawable/application_logo"/>
@@ -151,6 +155,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:text="Price"
+                            android:textColor="#0f0f0f"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -176,6 +181,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Description"
+                            android:textColor="#0f0f0f"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -198,6 +204,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Sketch"
+                            android:textColor="#0f0f0f"
                             android:textStyle="bold"/>
 
                         <ImageView
