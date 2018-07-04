@@ -96,8 +96,8 @@ public class FragmentRequestList extends Fragment {
                         Date endDate = new Date();
 
                         try {
-                            startDate = new SimpleDateFormat("yyyy-mm-dd").parse(sStartDate);
-                            endDate = new SimpleDateFormat("yyyy-mm-dd").parse(sEndDate);
+                            startDate = new SimpleDateFormat("yyyy-MM-dd").parse(sStartDate);
+                            endDate = new SimpleDateFormat("yyyy-MM-dd").parse(sEndDate);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }

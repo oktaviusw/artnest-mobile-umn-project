@@ -1,6 +1,7 @@
 package id.ac.umn.mobile.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Debug;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -44,7 +45,7 @@ public class RVAListCommission extends RecyclerView.Adapter<RVAListCommission.Vi
 
     @Override
     public void onBindViewHolder(RVAListCommission.ViewHolder holder, final int position) {
-        ModelCommissionInformation singleData = dataCommmisions.get(position);
+        final ModelCommissionInformation singleData = dataCommmisions.get(position);
 
         if(singleData.isSketchBaseAvailable()){
             Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/projectdata/"+singleData.getIdCommission()+"/SketchBase.jpg").fit().centerCrop().into(holder.commissionImage);
@@ -80,6 +81,15 @@ public class RVAListCommission extends RecyclerView.Adapter<RVAListCommission.Vi
         else if(singleData.getStatusRequest().equals("DECLINED")){
             holder.commissionStatus.setText("Expired");
         }
+
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ActivityCommissionDetail.class);
+                intent.putExtra( "idCommission", singleData.getIdCommission());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
