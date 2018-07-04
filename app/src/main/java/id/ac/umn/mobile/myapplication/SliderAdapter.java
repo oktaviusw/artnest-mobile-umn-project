@@ -21,24 +21,24 @@ public class SliderAdapter extends PagerAdapter {
             R.drawable.upload_icon,
             R.drawable.share_icon,
             R.drawable.money_icon,
-            R.drawable.money_icon,
-            R.drawable.money_icon,
+            R.drawable.artist_icon,
+            R.drawable.world_icon,
     };
 
     public String[] slide_headings = {
             "Upload",
             "Share",
             "Profit",
-            "Untitled 1",
-            "Untitled 2"
+            "Become Artist",
+            "Show the World"
     };
 
     public String[] slide_desc = {
             "Create and show your creation" + " to the world!",
             "Share with your client"+"\n or your friends!",
             "Get profit" + "\n from your creation",
-            "Lorem Ipsum",
-            "Dolor Sit Amet"
+            "Start your new career"+"\n to amuse the world ",
+            "Show what have you done" + "\n and express it to your hearts"
     };
 
     @Override

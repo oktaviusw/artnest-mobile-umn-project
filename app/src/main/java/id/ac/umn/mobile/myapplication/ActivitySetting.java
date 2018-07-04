@@ -107,6 +107,42 @@ public class ActivitySetting extends AppCompatActivity {
             }
         });
 
+        LinearLayout creditSettingHeader = findViewById(R.id.credit_setting_header);
+        final LinearLayout creditSettingContent = findViewById(R.id.credit_setting_content);
+        final ImageView creditSettingIndicator = findViewById(R.id.credit_setting_header_indicator);
+
+        creditSettingHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(creditSettingContent.getVisibility() == View.VISIBLE){
+                    creditSettingIndicator.setImageResource(R.drawable.ic_setting_drop_down);
+                    creditSettingContent.setVisibility(View.GONE);
+                }
+                else if(creditSettingContent.getVisibility() == View.GONE){
+                    creditSettingIndicator.setImageResource(R.drawable.ic_setting_drop_up);
+                    creditSettingContent.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        LinearLayout thankSettingHeader = findViewById(R.id.thank_setting_header);
+        final LinearLayout thankSettingContent = findViewById(R.id.thank_setting_content);
+        final ImageView thankSettingIndicator = findViewById(R.id.thank_setting_header_indicator);
+
+        thankSettingHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(thankSettingContent.getVisibility() == View.VISIBLE){
+                    thankSettingIndicator.setImageResource(R.drawable.ic_setting_drop_down);
+                    thankSettingContent.setVisibility(View.GONE);
+                }
+                else if(thankSettingContent.getVisibility() == View.GONE){
+                    thankSettingIndicator.setImageResource(R.drawable.ic_setting_drop_up);
+                    thankSettingContent.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         LoadUserData();
 
         newProfilePict = false;
