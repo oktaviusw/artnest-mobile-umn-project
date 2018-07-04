@@ -542,10 +542,11 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Handy Goandy - 00000010056"
+                            android:text="Anna Jeane - 00000010494"
                             android:gravity="center"
                             android:textSize="20dp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -557,10 +558,11 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Oktavius Wiguna - 00000010248"
+                            android:text="Handy Goandy - 00000010056"
                             android:gravity="center"
                             android:textSize="20dp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -576,6 +578,7 @@
                             android:gravity="center"
                             android:textSize="20dp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -587,7 +590,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Anna Jeane - 00000010494"
+                            android:text="Oktavius Wiguna - 00000010248"
                             android:gravity="center"
                             android:textSize="20dp" />
                     </LinearLayout>
@@ -670,17 +673,30 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="This course was guided by Seng Hansun, S.Si., M.Cs.
-We wont be able to create this project without his help. Thank you for everything! We are so lucky to have you as our lecturer!"
+                            android:text="This course was guided by"
                             android:gravity="center"
                             android:textSize="20dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Seng Hansun, S.Si., M.Cs."
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textSize="23dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="We wont be able to create this project without his help. Thank you for everything! We are so lucky to have you as our lecturer!"
+                            android:textAlignment="center"/>
+
+
                     </LinearLayout>
 
 
