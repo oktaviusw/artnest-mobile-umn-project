@@ -142,8 +142,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_explore) {
             CURRENT_STATE = "HOME";
-        } else if (id == R.id.nav_messages) {
-            CURRENT_STATE = "MESSAGE";
         } else if (id == R.id.nav_request_list) {
             CURRENT_STATE = "COMMISSION_CUSTOMER";
         } else if (id == R.id.nav_artist_profile_page) {
@@ -216,8 +214,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         TextView nameUser = (TextView) headerNavView.findViewById(R.id.fullnameProfileNav);
         nameUser.setText(dataUserLogin.getUserName());
 
-        TextView tokenUser = (TextView) headerNavView.findViewById(R.id.tokenProfileNav);
-        tokenUser.setText(dataUserLogin.getUserToken() + " Token");
+        TextView tokenUser = (TextView) headerNavView.findViewById(R.id.email_profile_nav);
+        tokenUser.setText(dataUserLogin.getUserEmail());
 
         Menu menu = navigationView.getMenu();
         MenuItem menuBecomeArtist = menu.findItem(R.id.nav_artist_become_artist);

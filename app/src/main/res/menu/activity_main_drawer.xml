@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_action_explore"
             android:title="Explore" />
         <item
-            android:id="@+id/nav_messages"
-            android:icon="@drawable/ic_action_message"
-            android:title="Messages" />
-        <item
             android:id="@+id/nav_request_list"
             android:icon="@drawable/ic_action_commision"
             android:title="Requests" />

@@ -30,7 +30,7 @@ public class FragmentExplore extends Fragment {
     View myView;
 
     private RecyclerView recyclerViewArtist; //= findViewById(R.id.recyclerView);
-    private RVAListArtist adapterArtistList;
+    private RVAListArtistSearchResult adapterArtistList;
 
     private RecyclerView recyclerViewArtwork;
     private RVAListArtwork adapterArtworkList;
@@ -43,7 +43,7 @@ public class FragmentExplore extends Fragment {
         myView = inflater.inflate(R.layout.fragment_explore,container,false);
 
         recyclerViewArtist = myView.findViewById(R.id.RV_artist_list_horizontal);
-        adapterArtistList = new RVAListArtist(myView.getContext(),artistList);
+        adapterArtistList = new RVAListArtistSearchResult(myView.getContext(),artistList);
         adapterArtistList.notifyDataSetChanged();
         recyclerViewArtist.setAdapter(adapterArtistList);
 
@@ -90,8 +90,6 @@ public class FragmentExplore extends Fragment {
 
             }
         });
-
-
 
         /*Get All Artwork Data*/
         Call<JsonElement> callArtworks = webServiceAPI.getAllArtworksData();
