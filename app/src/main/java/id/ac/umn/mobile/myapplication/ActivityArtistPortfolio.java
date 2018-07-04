@@ -3,6 +3,7 @@ package id.ac.umn.mobile.myapplication;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -180,6 +182,20 @@ public class ActivityArtistPortfolio extends AppCompatActivity {
 
         adapterArtworkList.notifyDataSetChanged();
         recyclerViewArtwork.setAdapter(adapterArtworkList);
+
+        Button askCommissionButton = (Button) findViewById(R.id.ask_commission_button);
+        askCommissionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String mailto = "mailto:"+artistData.getEmail();
+
+                Intent mailClient = new Intent(Intent.ACTION_SENDTO);
+                mailClient.setData(Uri.parse(mailto));
+                //mailClient.setClassName("com.google.android.gm", "com.google.android.gm.ConversationListActivity");
+                startActivity(mailClient);
+            }
+        });
 
         ScrollView scrollView = (ScrollView) findViewById(R.id.scroll_view_portfolio);
         scrollView.requestFocus(View.FOCUS_UP);

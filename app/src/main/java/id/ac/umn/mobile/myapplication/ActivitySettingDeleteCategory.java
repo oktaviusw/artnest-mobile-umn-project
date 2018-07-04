@@ -214,4 +214,15 @@ public class ActivitySettingDeleteCategory extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent data = new Intent();
+        data.setData(Uri.parse(""));
+        setResult(RESULT_CANCELED, data);
+
+        progressDialog.dismiss();
+        finish();
+        super.onBackPressed();
+    }
 }

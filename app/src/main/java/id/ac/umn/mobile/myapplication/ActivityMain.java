@@ -152,8 +152,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             CURRENT_STATE = "BECOME_ARTIST";
         } else if (id == R.id.nav_setting_account) {
             CURRENT_STATE = "SETTING_ACCOUNT";
-        } else if (id == R.id.nav_info_about_us) {
-            CURRENT_STATE = "INFO_ABOUT_US";
         } else if (id == R.id.nav_log_out) {
             SharedPreferences.Editor prefEdit = getSharedPreferences("LOGIN_PREFERENCES", MODE_PRIVATE).edit();
             prefEdit.clear();
@@ -277,13 +275,14 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 2){  //Add New Category Event
-            Toast.makeText(this, data.getData().toString(), Toast.LENGTH_LONG).show();
-
+        if(requestCode == 2){
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, data.getData().toString(), Toast.LENGTH_LONG).show();
+            }
             if(data.getData().toString().equals("SUCCESSFUL")) LoadUserData();
         }
 
-        ValidateNavigationDrawer();
+        LoadUserData();
         invalidateOptionsMenu();
     }
 }

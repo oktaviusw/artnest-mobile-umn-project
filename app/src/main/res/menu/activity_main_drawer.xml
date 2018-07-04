@@ -41,10 +41,6 @@
                 android:icon="@drawable/ic_action_setting_utility"
                 android:title="Account Settings" />
             <item
-                android:id="@+id/nav_info_about_us"
-                android:icon="@drawable/ic_action_about_us"
-                android:title="About Us" />
-            <item
                 android:id="@+id/nav_log_out"
                 android:icon="@drawable/ic_action_log_out"
                 android:title="Log Out" />

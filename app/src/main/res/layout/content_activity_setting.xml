@@ -599,7 +599,6 @@
 
             </android.support.v7.widget.CardView>
 
-
             <!-- Thanks -->
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"

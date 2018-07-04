@@ -70,6 +70,17 @@ public class ActivityDeleteArtwork extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent data = new Intent();
+        data.setData(Uri.parse(""));
+        setResult(RESULT_CANCELED, data);
+
+        progressDialog.dismiss();
+        finish();
+        super.onBackPressed();
+    }
+
     public void seedDataArtwork(){
         progressDialog.show();
         String idArtwork = getIntent().getStringExtra("idArtwork");

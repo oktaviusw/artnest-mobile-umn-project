@@ -266,19 +266,31 @@ public class ActivitySetting extends AppCompatActivity {
             }
         }
         if(requestCode == 2 || requestCode == 3){  //Add New Category Event
-            Toast.makeText(this, data.getData().toString(), Toast.LENGTH_LONG).show();
-
-            if (resultCode == RESULT_OK) LoadArtistCategoriesData();
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, data.getData().toString(), Toast.LENGTH_LONG).show();
+                LoadArtistCategoriesData();
+            }
         }
     }
 
     @Override
     public boolean onSupportNavigateUp(){
         Intent returnIntent = new Intent();
-        setResult(Activity.RESULT_CANCELED, returnIntent);
+        setResult(Activity.RESULT_OK, returnIntent);
         progressDialog.dismiss();
         finish();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent data = new Intent();
+        data.setData(Uri.parse(""));
+        setResult(RESULT_CANCELED, data);
+
+        progressDialog.dismiss();
+        finish();
+        super.onBackPressed();
     }
 
     public void LoadUserData(){

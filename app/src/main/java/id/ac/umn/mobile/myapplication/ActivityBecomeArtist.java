@@ -185,11 +185,22 @@ public class ActivityBecomeArtist extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp(){
         Intent data = new Intent();
-        data.setData(Uri.parse("CANCELED"));
+        data.setData(Uri.parse(""));
         setResult(RESULT_CANCELED, data);
 
         progressDialog.dismiss();
         finish();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent data = new Intent();
+        data.setData(Uri.parse(""));
+        setResult(RESULT_CANCELED, data);
+
+        progressDialog.dismiss();
+        finish();
+        super.onBackPressed();
     }
 }
