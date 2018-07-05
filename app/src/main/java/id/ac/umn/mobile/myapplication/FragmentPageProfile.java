@@ -191,7 +191,7 @@ public class FragmentPageProfile extends Fragment {
                 .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().into(backgroundImage);
 
         Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/userdata/"+artistData.getEmail()+"/ProfilePicture.png")
-                .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).centerCrop().transform(new PicassoCircleTransform()).into(profileImage);
+                .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().transform(new PicassoCircleTransform()).into(profileImage);
 
         displayName.setText(artistData.getName());
         email.setText(artistData.getEmail());

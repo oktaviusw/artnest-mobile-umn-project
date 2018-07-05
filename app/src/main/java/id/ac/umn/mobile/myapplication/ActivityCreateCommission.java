@@ -195,6 +195,7 @@ public class ActivityCreateCommission extends AppCompatActivity {
     }
 
     public void UploadDataToServer(String artistID, String customerEmail, String titleProject, String price, String description, String startDate, String endDate){
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Creating your order");
         progressDialog.show();
 
