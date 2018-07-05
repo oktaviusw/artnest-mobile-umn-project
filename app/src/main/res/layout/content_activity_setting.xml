@@ -317,30 +317,31 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="3dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
                             android:text="Facebook Link"
                             android:textSize="15sp" />
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="fb.me/" />
+                                android:layout_weight="1"
+                                android:text="www.facebook.com/"
+                                android:textAlignment="textEnd"/>
 
                             <EditText
                                 android:id="@+id/edit_fb_link"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"/>
 
                         </LinearLayout>
                     </LinearLayout>
@@ -349,30 +350,32 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="3dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_weight="1"
                             android:text="Twitter Link"
                             android:textSize="15sp" />
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="twitter.com/" />
+                                android:layout_weight="1"
+                                android:text="www.facebook.com/"
+                                android:textAlignment="textEnd"/>
 
                             <EditText
                                 android:id="@+id/edit_twitter_link"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
 
                         </LinearLayout>
                     </LinearLayout>
