@@ -28,14 +28,9 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
-
-
-
         progressDialog = new ProgressDialog(this);
 
         progressDialog.setMessage("Signing Up");
-
 
         Button signupButton = (Button) findViewById(R.id.signup_button);
         signupButton.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +69,6 @@ public class SignUpActivity extends AppCompatActivity {
         EditText passwordEdit = (EditText) findViewById(R.id.password_edit);
 
        String username = usernameEdit.getText().toString();
-        System.out.println(username);
        String email = emailEdit.getText().toString();
        String password = passwordEdit.getText().toString();
 
@@ -90,18 +84,16 @@ public class SignUpActivity extends AppCompatActivity {
                    JsonObject obj = element.getAsJsonObject();
 
                    String statusCheck = obj.get("status").getAsString();
+                   String resultServer = obj.get("result").getAsString();
 
                    if(statusCheck.equals("OK")){
-                       String message = obj.get("result").getAsString();
-
-
                        Intent i = new Intent(getBaseContext(), SignInActivity.class);
                        startActivity(i);
-                       Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getApplicationContext(), resultServer, Toast.LENGTH_SHORT).show();
 
                    }
-                   else if(statusCheck.equals("ERROR")){
-                       Toast.makeText(getApplicationContext(), "Email already exists, please try again.", Toast.LENGTH_SHORT).show();
+                   else{
+                       Toast.makeText(getApplicationContext(), resultServer, Toast.LENGTH_SHORT).show();
                    }
                }
            }

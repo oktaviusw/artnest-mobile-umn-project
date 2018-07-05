@@ -23,6 +23,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.nex3z.flowlayout.FlowLayout;
 import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -146,10 +147,10 @@ public class ActivityArtistPortfolio extends AppCompatActivity {
         float conversionDP = this.getResources().getDisplayMetrics().density;
 
         Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/userdata/"+artistData.getEmail()+"/BackgroundProfile.jpg")
-                .memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().into(backgroundImage);
+                .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().into(backgroundImage);
 
         Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/userdata/"+artistData.getEmail()+"/ProfilePicture.png")
-                .memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().transform(new PicassoCircleTransform()).into(profileImage);
+                .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().transform(new PicassoCircleTransform()).into(profileImage);
 
         displayName.setText(artistData.getName());
         email.setText(artistData.getEmail());

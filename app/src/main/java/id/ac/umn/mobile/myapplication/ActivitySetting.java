@@ -254,7 +254,6 @@ public class ActivitySetting extends AppCompatActivity {
 
                     // Set the Image in ImageView for Previewing the Media
                     newBackgroundArtistPict = true;
-
                     ImageView backgroundArtistPict = findViewById(R.id.imageView_background_profile);
                     Picasso.get().load(selectedImage).fit().centerCrop().into(backgroundArtistPict);
                 } else {
@@ -509,7 +508,7 @@ public class ActivitySetting extends AppCompatActivity {
                     String fbLinkEditable = artistData.getFbLink().substring(25);
                     String twitterLinkEditable = artistData.getTwitterLink().substring(24);
                     Picasso.get().load("https://artnest-umn.000webhostapp.com/assets/userdata/"+artistData.getEmail()+"/BackgroundProfile.jpg")
-                            .fit().centerCrop().into(editBackgroundImageView);
+                            .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).fit().centerCrop().into(editBackgroundImageView);
                     LoadArtistCategories();
 
                     editTextAboutMe.setText(artistData.getDesc());
