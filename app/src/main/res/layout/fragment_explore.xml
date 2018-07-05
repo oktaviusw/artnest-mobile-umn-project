@@ -27,7 +27,7 @@
                         android:paddingLeft="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Artworks > "
+                        android:text="Artworks"
                         android:textColor="#0f0f0f"
                         android:textStyle="bold"
                         android:textSize="24sp"/>
@@ -58,7 +58,7 @@
                         android:paddingLeft="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Artists > "
+                        android:text="Artists"
                         android:textColor="#0f0f0f"
                         android:textStyle="bold"
                         android:textSize="24sp"/>

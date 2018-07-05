@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Title Artwork"
-                android:textSize="23sp"
+                android:textSize="20sp"
                 android:textColor="#000"
                 android:textStyle="bold" />
 
@@ -56,16 +56,16 @@
                     android:layout_marginLeft="10dp"
                     android:text="Artist Name"
                     android:textColor="#0f0f0f"
-                    android:textSize="20sp"/>
+                    android:textSize="18sp"/>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/artwork_description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_margin="10dp"
                 android:text="Artwork Description"
-                android:textSize="18sp"/>
+                android:textSize="14sp"/>
         </LinearLayout>
     </ScrollView>
 
